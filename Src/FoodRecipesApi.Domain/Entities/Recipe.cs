@@ -10,10 +10,11 @@ namespace FoodRecipesApi.Domain.Entities
         {
             RecipeSteps = new List<RecipeStep>();
         }
+
         public int RecipeId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Author { get; set; }
+        public Author Author { get; set; }
         public ICollection<RecipeStep> RecipeSteps { get; private set; }
         public string ImageUrl { get; set; }
         public TimeSpan PreparationTime { get; set; }
