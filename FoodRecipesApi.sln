@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.Domain", "Sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.Infrastructure", "Src\FoodRecipesApi.Infrastructure\FoodRecipesApi.Infrastructure.csproj", "{B79ED4C9-CA25-40E8-9A34-E998EAC8F3B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.Persistance", "Src\FoodRecipesApi.Persistance\FoodRecipesApi.Persistance.csproj", "{C6C20697-BBB4-480C-B725-CC33BBC35BFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.Persistence", "Src\FoodRecipesApi.Persistance\FoodRecipesApi.Persistence.csproj", "{C6C20697-BBB4-480C-B725-CC33BBC35BFF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.WebApi", "Src\FoodRecipesApi.WebApi\FoodRecipesApi.WebApi.csproj", "{4953414B-EA3A-4240-A712-F95055AA7830}"
 EndProject
