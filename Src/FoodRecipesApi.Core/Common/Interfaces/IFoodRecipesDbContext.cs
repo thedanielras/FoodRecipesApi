@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using FoodRecipesApi.Domain.Entities;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FoodRecipesApi.Application.Common.Interfaces
 {
-    interface IFoodRecipesDbContext
+    public interface IFoodRecipesDbContext
     {
         DbSet<Recipe> Recipes { get; set; }
+
+        DbSet<Author> Authors { get; set; }
     }
 }
