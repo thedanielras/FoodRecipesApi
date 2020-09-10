@@ -8,5 +8,6 @@ namespace FoodRecipesApi.Domain.Entities
     {
         public int RecipeStepId { get; set; }
         public string Instruction { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
