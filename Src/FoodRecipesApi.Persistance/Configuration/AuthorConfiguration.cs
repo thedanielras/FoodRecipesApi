@@ -12,7 +12,9 @@ namespace FoodRecipesApi.Persistence.Configuration
         public void Configure(EntityTypeBuilder<Author> builder)
         {
             builder.HasMany(a => a.Recipes)
-                .WithOne(r => r.Author);
+                .WithOne(r => r.Author)
+                .HasForeignKey(r => r.AuthorId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(a => a.Name)
                 .HasMaxLength(20)
@@ -23,6 +25,7 @@ namespace FoodRecipesApi.Persistence.Configuration
                 .IsRequired();
 
             builder.Property(a => a.Born)
+                .HasColumnType("Date")
                 .IsRequired();
 
             builder.Property(a => a.ImageUrl)
