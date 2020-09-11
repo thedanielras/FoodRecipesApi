@@ -16,7 +16,7 @@ namespace FoodRecipesApi.Domain.Entities
         public string Surname { get; set; }
         public string ImageUrl { get; set; }
         public DateTime Born { get; set; }
-        public TimeSpan Age => Born - DateTime.Now;
+        public int Age => (int)(DateTime.Now - Born).TotalDays / 365;
         public ICollection<Recipe> Recipes { get; private set; }
     }
 }
