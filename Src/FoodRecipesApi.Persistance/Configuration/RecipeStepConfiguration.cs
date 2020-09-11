@@ -12,7 +12,9 @@ namespace FoodRecipesApi.Persistence.Configuration
         public void Configure(EntityTypeBuilder<RecipeStep> builder)
         {
             builder.HasOne(rs => rs.Recipe)
-                 .WithMany(r => r.RecipeSteps);
+                 .WithMany(r => r.RecipeSteps)
+                 .HasForeignKey(rs => rs.RecipeId);
+
 
             builder.Property(rs => rs.Instruction)
                 .HasMaxLength(500)
