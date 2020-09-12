@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
+using FoodRecipesApi.Application;
 using FoodRecipesApi.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +28,7 @@ namespace FoodRecipesApi.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddPersistence(Configuration);
+            services.AddApplication();
             services.AddControllers();            
         }
 
