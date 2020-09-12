@@ -15,7 +15,7 @@ namespace FoodRecipesApi.Application.Common.Dtos
         public string ImageUrl { get; set; }
         public int PreparationTimeInMinutes { get; set; }
         public int TotalTimeInMinutes { get; set; }
-        public IEnumerable<RecipeStep> RecipeSteps { get; set; }  
+        public IEnumerable<RecipeStepDto> RecipeSteps { get; set; }  
         public IEnumerable<IngredientDto> RecipeIngredients { get; set; }
     }
 }
