@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{DE2D6339-3AA2-4947-9AE1-766160A46DC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodRecipesApi.Core", "Src\FoodRecipesApi.Core\FoodRecipesApi.Core.csproj", "{361C7DA2-2F84-468D-8C04-EA177F9D82A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.Application", "Src\FoodRecipesApi.Core\FoodRecipesApi.Application.csproj", "{361C7DA2-2F84-468D-8C04-EA177F9D82A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodRecipesApi.Domain", "Src\FoodRecipesApi.Domain\FoodRecipesApi.Domain.csproj", "{6E392132-91B6-4BCE-B0E2-8C6372221347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.Domain", "Src\FoodRecipesApi.Domain\FoodRecipesApi.Domain.csproj", "{6E392132-91B6-4BCE-B0E2-8C6372221347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodRecipesApi.Infrastructure", "Src\FoodRecipesApi.Infrastructure\FoodRecipesApi.Infrastructure.csproj", "{B79ED4C9-CA25-40E8-9A34-E998EAC8F3B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.Infrastructure", "Src\FoodRecipesApi.Infrastructure\FoodRecipesApi.Infrastructure.csproj", "{B79ED4C9-CA25-40E8-9A34-E998EAC8F3B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodRecipesApi.Persistance", "Src\FoodRecipesApi.Persistance\FoodRecipesApi.Persistance.csproj", "{C6C20697-BBB4-480C-B725-CC33BBC35BFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.Persistence", "Src\FoodRecipesApi.Persistance\FoodRecipesApi.Persistence.csproj", "{C6C20697-BBB4-480C-B725-CC33BBC35BFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodRecipesApi.WebApi", "Src\FoodRecipesApi.WebApi\FoodRecipesApi.WebApi.csproj", "{4953414B-EA3A-4240-A712-F95055AA7830}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipesApi.WebApi", "Src\FoodRecipesApi.WebApi\FoodRecipesApi.WebApi.csproj", "{4953414B-EA3A-4240-A712-F95055AA7830}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

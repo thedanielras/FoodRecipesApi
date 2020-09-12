@@ -8,6 +8,8 @@ namespace FoodRecipesApi.Domain.Entities
     {
         public int IngredientId { get; set; }
         public string Name { get; set; }
-        public IngredientQuantity Quantity {get; set;}
+        public IngredientQuantity Quantity { get; set; }
+        public int QuantityId { get; set; }
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
     }
 }
