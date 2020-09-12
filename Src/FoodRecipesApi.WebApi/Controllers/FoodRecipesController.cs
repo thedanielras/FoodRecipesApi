@@ -1,7 +1,8 @@
 ﻿using FoodRecipesApi.Application.Common.Dtos;
 using FoodRecipesApi.Application.Common.Interfaces;
-
+using FoodRecipesApi.Application.Common.Recipes.Queries.GetAllRecipes;
 using FoodRecipesApi.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -16,48 +17,19 @@ namespace FoodRecipesApi.WebApi.Controllers
     [Route("[controller]")]
     public class FoodRecipesController : ControllerBase
     {
-        private readonly ILogger _logger;
-        private readonly IFoodRecipesDbContext _context;
+        private readonly IMediator _mediator;
 
-        public FoodRecipesController(ILogger<FoodRecipesController> logger, IFoodRecipesDbContext context)
+        public FoodRecipesController(IMediator mediator)
         {
-            _logger = logger;
-            _context = context;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IEnumerable<RecipeDto> Get()
+        public async Task<ActionResult<IEnumerable<RecipeDto>>> Get()
         {
-            var recipes = _context.Recipes
-                .Include(r => r.Author)
-                .Include(r => r.RecipeIngredients)
-                    .ThenInclude(ri => ri.Ingredient)
-                        .ThenInclude(i => i.Quantity)
-                            .ThenInclude(q => q.MeasurementUnit)
-                .Include(r => r.RecipeSteps)
-                .Select(r => new RecipeDto()
-                {
-                    RecipeId = r.RecipeId,
-                    Title = r.Title,
-                    Description = r.Description,
-                    Author = $"{r.Author.Name} {r.Author.Surname}",
-                    ImageUrl = r.ImageUrl,
-                    PreparationTimeInMinutes = r.PreparationTimeInMinutes,
-                    TotalTimeInMinutes = r.TotalTimeInMinutes,
-                    RecipeSteps = r.RecipeSteps,
-                    RecipeIngredients = r.RecipeIngredients.Select(ri => new IngredientDto()
-                    {
-                        IngredientId = ri.Ingredient.IngredientId,
-                        Name = ri.Ingredient.Name,
-                        Quantity = new IngredientQuantityDto() { 
-                            Amount = ri.Ingredient.Quantity.Amount,
-                            MeasurementUnit = ri.Ingredient.Quantity.MeasurementUnit
-                        } 
-                    })
-                });
-                
+           var recipes = await _mediator.Send(new GetAllRecipesQuery());
 
-            return recipes.ToList();
+            return Ok(recipes);
         }
     }
 }
