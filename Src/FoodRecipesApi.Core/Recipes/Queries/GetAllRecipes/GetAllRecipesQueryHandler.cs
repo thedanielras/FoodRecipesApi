@@ -31,7 +31,7 @@ namespace FoodRecipesApi.Application.Recipes.Queries.GetAllRecipes
             _recipeMapper = recipeMapper;
         }
 
-        public Task<List<RecipeDto>> Handle(GetAllRecipesQuery request, CancellationToken cancellationToken)
+        public async Task<List<RecipeDto>> Handle(GetAllRecipesQuery request, CancellationToken cancellationToken)
         {
             IQueryable<RecipeDto> recipes = null;
 
@@ -51,7 +51,7 @@ namespace FoodRecipesApi.Application.Recipes.Queries.GetAllRecipes
             }
 
 
-            return recipes.ToListAsync<RecipeDto>() ?? null;
+            return await recipes.ToListAsync<RecipeDto>() ?? null;
         }
     }
 }
