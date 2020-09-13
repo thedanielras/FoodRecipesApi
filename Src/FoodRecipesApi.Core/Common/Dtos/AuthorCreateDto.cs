@@ -9,6 +9,5 @@ namespace FoodRecipesApi.Application.Common.Dtos
         public string Name { get; set; }
         public string Surname { get; set; }
         public string ImageUrl { get; set; }
-        public DateTime Born { get; set; }
     }
 }
