@@ -18,10 +18,10 @@ namespace FoodRecipesApi.Domain.Entities
         public string Description { get; set; }
         public Author Author { get; set; }
         public int AuthorId { get; set; }
-        public ICollection<RecipeStep> RecipeSteps { get; private set; }
+        public ICollection<RecipeStep> RecipeSteps { get; set; }
         public string ImageUrl { get; set; }
         public int PreparationTimeInMinutes { get; set; }
         public int TotalTimeInMinutes { get; set; }
-        public ICollection<RecipeIngredient> RecipeIngredients { get; private set; }
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
     }
 }
