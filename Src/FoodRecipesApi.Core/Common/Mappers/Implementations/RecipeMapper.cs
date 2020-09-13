@@ -51,7 +51,6 @@ namespace FoodRecipesApi.Application.Common.Mappers.Implementations
                 Author = new Author() { 
                     Name = recipeCreateDto.Author.Name,
                     Surname = recipeCreateDto.Author.Surname,
-                    Born = recipeCreateDto.Author.Born,
                     ImageUrl = recipeCreateDto.Author.ImageUrl
                 },
                 ImageUrl = recipeCreateDto.ImageUrl,
