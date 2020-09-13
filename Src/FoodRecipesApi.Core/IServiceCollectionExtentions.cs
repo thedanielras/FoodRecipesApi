@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using FoodRecipesApi.Application.Common.Mappers.Implementations;
+using FoodRecipesApi.Application.Common.Mappers.Interfaces;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ namespace FoodRecipesApi.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddScoped<IRecipeMapper, RecipeMapper>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             return services;
