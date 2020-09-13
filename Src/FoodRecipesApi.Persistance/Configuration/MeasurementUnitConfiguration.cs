@@ -16,7 +16,7 @@ namespace FoodRecipesApi.Persistence.Configuration
                 .HasForeignKey<MeasurementUnit>(mu => mu.IngredientQuantityId);
 
             builder.Property(mu => mu.Unit)
-                .HasMaxLength(15)
+                .HasMaxLength(75)
                 .IsRequired();
         }
     }

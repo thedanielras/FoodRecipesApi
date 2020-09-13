@@ -17,7 +17,7 @@ namespace FoodRecipesApi.Persistence.Configuration
                .IsRequired();
 
             builder.Property(i => i.Name)
-                .HasMaxLength(50)
+                .HasMaxLength(150)
                 .IsRequired();
         }
     }
