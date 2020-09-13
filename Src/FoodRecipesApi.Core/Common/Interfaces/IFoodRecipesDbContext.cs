@@ -15,5 +15,7 @@ namespace FoodRecipesApi.Application.Common.Interfaces
         DbSet<Author> Authors { get; set; }
 
         int SaveChanges();
+
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
