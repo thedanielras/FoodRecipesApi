@@ -32,7 +32,8 @@ namespace FoodRecipesApi.WebApi
         {
             services.AddPersistence(Configuration);
             services.AddApplication();
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(conf => conf.RegisterValidatorsFromAssemblyContaining<IFoodRecipesDbContext>());
             services.AddSwaggerDocument(confing => 
             confing.PostProcess = document => 
                 {
