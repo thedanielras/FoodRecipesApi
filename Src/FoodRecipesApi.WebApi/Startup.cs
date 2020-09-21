@@ -33,6 +33,7 @@ namespace FoodRecipesApi.WebApi
             services.AddPersistence(Configuration);
             services.AddApplication();
             services.AddControllers()
+                .AddNewtonsoftJson()
                 .AddFluentValidation(conf => conf.RegisterValidatorsFromAssemblyContaining<IFoodRecipesDbContext>());
             services.AddSwaggerDocument(confing => 
             confing.PostProcess = document => 
@@ -61,7 +62,12 @@ namespace FoodRecipesApi.WebApi
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/error");
+            }
+            else
+            {
+                app.UseExceptionHandler("/error");
             }
 
             app.UseHttpsRedirection();
