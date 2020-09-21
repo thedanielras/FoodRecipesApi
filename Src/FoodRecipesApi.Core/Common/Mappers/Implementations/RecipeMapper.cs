@@ -40,43 +40,6 @@ namespace FoodRecipesApi.Application.Common.Mappers.Implementations
             };
 
             return recipeDto;
-        }        
-
-        public Recipe MapFromCreateDtoToEntity(RecipeCreateDto recipeCreateDto)
-        {
-            var recipeEntity = new Recipe()
-            {
-                Title = recipeCreateDto.Title,
-                Description = recipeCreateDto.Description,
-                Author = new Author() { 
-                    Name = recipeCreateDto.Author.Name,
-                    Surname = recipeCreateDto.Author.Surname,
-                    ImageUrl = recipeCreateDto.Author.ImageUrl
-                },
-                ImageUrl = recipeCreateDto.ImageUrl,
-                PreparationTimeInMinutes = recipeCreateDto.PreparationTimeInMinutes,
-                TotalTimeInMinutes = recipeCreateDto.TotalTimeInMinutes,
-                RecipeSteps = recipeCreateDto.RecipeSteps.Select(rs => new RecipeStep() {
-                    Instruction = rs.Instruction,
-                    ImageUrl = rs.ImageUrl
-                }).ToList(),
-                RecipeIngredients = recipeCreateDto.RecipeIngredients.Select(ri => new RecipeIngredient() { 
-                    Ingredient = new Ingredient()
-                    {
-                        Name = ri.Name,
-                        Quantity = new IngredientQuantity() { 
-                            Amount = ri.Quantity.Amount,
-                            MeasurementUnit = new MeasurementUnit()
-                            {
-                               Unit =  ri.Quantity.MeasurementUnit
-                            }
-                        } 
-                    }
-                }).ToList()
-            };
-
-            return recipeEntity;
-        }
-
+        }    
     }
 }

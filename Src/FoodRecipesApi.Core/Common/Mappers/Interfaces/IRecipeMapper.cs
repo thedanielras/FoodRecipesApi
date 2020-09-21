@@ -9,6 +9,5 @@ namespace FoodRecipesApi.Application.Common.Mappers.Interfaces
     public interface IRecipeMapper
     {
        public RecipeDto MapToRecipeDto(Recipe recipe);
-       public Recipe MapFromCreateDtoToEntity(RecipeCreateDto recipeCreateDto);       
     }
 }
