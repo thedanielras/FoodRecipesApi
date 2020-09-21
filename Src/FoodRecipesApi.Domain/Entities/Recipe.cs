@@ -8,7 +8,6 @@ namespace FoodRecipesApi.Domain.Entities
     {
         public Recipe()
         {
-            Author = new Author();
             RecipeSteps = new List<RecipeStep>();
             RecipeIngredients = new List<RecipeIngredient>();
         }
