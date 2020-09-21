@@ -13,7 +13,9 @@ namespace FoodRecipesApi.Persistence.Configuration
         {
             builder.HasOne(mu => mu.IngredientQuantity)
                 .WithOne(iq => iq.MeasurementUnit)
-                .HasForeignKey<MeasurementUnit>(mu => mu.IngredientQuantityId);
+                .HasForeignKey<MeasurementUnit>(mu => mu.IngredientQuantityId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
 
             builder.Property(mu => mu.Unit)
                 .HasMaxLength(75)
