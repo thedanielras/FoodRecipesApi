@@ -1,6 +1,7 @@
 ﻿using FoodRecipesApi.Application.Common.Interfaces;
 using FoodRecipesApi.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +14,22 @@ namespace FoodRecipesApi.Application.System.Commands.DbSeedCommand
     public class DbSeedCommandHandler : IRequestHandler<DbSeedCommand, Unit>
     {
         private readonly IFoodRecipesDbContext _context;
+        private readonly ILogger _logger;
 
-        public DbSeedCommandHandler(IFoodRecipesDbContext context)
+        public DbSeedCommandHandler(IFoodRecipesDbContext context, ILogger<DbSeedCommandHandler> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
-        public async Task<Unit> Handle(DbSeedCommand request, CancellationToken cancellationToken)
+        public Task<Unit> Handle(DbSeedCommand request, CancellationToken cancellationToken)
         {
-            await SeedRecipesAsync(cancellationToken);
+            SeedRecipes();
 
-            return Unit.Value;
+            return Task.FromResult(Unit.Value);
         }
 
-        private async Task SeedRecipesAsync(CancellationToken cancellationToken)
+        private void SeedRecipes()
         {
             var sampleRecipes = new List<Recipe>();
 
@@ -358,8 +361,15 @@ namespace FoodRecipesApi.Application.System.Commands.DbSeedCommand
                     _context.Recipes.Add(recipe);
                 }
 
-                _context.SaveChanges();
-            });            
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Database seeding failed!");
+                }
+            });
         }
     }
 }
