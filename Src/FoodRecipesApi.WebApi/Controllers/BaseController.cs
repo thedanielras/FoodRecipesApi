@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FoodRecipesApi.WebApi.Controllers
 {
-    public class BaseController : ControllerBase
+    public abstract class BaseController : ControllerBase
     {        
         public virtual ActionResult<ApiErrorModel> SendError()
         {
