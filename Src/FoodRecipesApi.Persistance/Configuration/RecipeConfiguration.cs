@@ -14,6 +14,7 @@ namespace FoodRecipesApi.Persistence.Configuration
             builder.HasOne(r => r.Author)
                 .WithMany(a => a.Recipes)
                 .HasForeignKey(r => r.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
             builder.HasMany(r => r.RecipeSteps)
