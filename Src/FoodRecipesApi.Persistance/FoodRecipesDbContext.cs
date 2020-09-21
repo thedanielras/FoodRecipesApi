@@ -16,8 +16,11 @@ namespace FoodRecipesApi.Persistence
         {
         }
 
-        public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Author> Authors { get; set; }
+
+        public DbSet<Recipe> Recipes { get; set; }      
+
+        public DbSet<Ingredient> Ingredients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

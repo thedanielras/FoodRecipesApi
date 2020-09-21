@@ -10,9 +10,11 @@ namespace FoodRecipesApi.Application.Common.Interfaces
 {
     public interface IFoodRecipesDbContext
     {
-        DbSet<Recipe> Recipes { get; set; }
-
         DbSet<Author> Authors { get; set; }
+
+        DbSet<Recipe> Recipes { get; set; }
+        
+        DbSet<Ingredient> Ingredients { get; set; }
 
         int SaveChanges();
 
