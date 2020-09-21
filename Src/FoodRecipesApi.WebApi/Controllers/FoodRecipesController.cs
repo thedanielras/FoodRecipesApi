@@ -1,10 +1,11 @@
 ﻿using FoodRecipesApi.Application.Common.Dtos;
 using FoodRecipesApi.Application.Common.Interfaces;
-using FoodRecipesApi.Application.Recipes.Commands.CreateRecipe;
 using FoodRecipesApi.Application.Recipes.Commands.DeleteRecipe;
+using FoodRecipesApi.Application.Recipes.Commands.UpsertRecipe;
 using FoodRecipesApi.Application.Recipes.Queries.GetAllRecipes;
 using FoodRecipesApi.Application.Recipes.Queries.GetRecipe;
 using FoodRecipesApi.Domain.Entities;
+using FoodRecipesApi.WebApi.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,8 +18,8 @@ using System.Threading.Tasks;
 namespace FoodRecipesApi.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class FoodRecipesController : ControllerBase
+    [Route("api/v1/[controller]")]
+    public class FoodRecipesController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -48,9 +49,9 @@ namespace FoodRecipesApi.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateRecipe(CreateRecipeCommand createRecipeCommand)
+        public async Task<ActionResult<int>> UpsertRecipe(UpsertRecipeCommand upsertRecipeCommand)
         {
-            int recipeId = await _mediator.Send(createRecipeCommand);
+            int recipeId = await _mediator.Send(upsertRecipeCommand);
 
             return Ok(recipeId);
         }
@@ -61,6 +62,12 @@ namespace FoodRecipesApi.WebApi.Controllers
             await _mediator.Send(new DeleteRecipeCommand(id));
 
             return NoContent();
-        } 
+        }
+
+        [Route("/error")]
+        public override ActionResult<ApiErrorModel> SendError()
+        {
+            return base.SendError();
+        }
     }
 }
