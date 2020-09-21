@@ -335,3 +335,44 @@ VALUES (N'20200913211251_AddAlternateKeyByRecipeAuthorIdAndTitleProps', N'3.1.8'
 
 GO
 
+ALTER TABLE [IngredientQuantity] DROP CONSTRAINT [FK_IngredientQuantity_Ingredient_IngredientId];
+
+GO
+
+ALTER TABLE [RecipeIngredient] DROP CONSTRAINT [FK_RecipeIngredient_Ingredient_IngredientId];
+
+GO
+
+ALTER TABLE [Recipes] DROP CONSTRAINT [FK_Recipes_Authors_AuthorId];
+
+GO
+
+ALTER TABLE [Ingredient] DROP CONSTRAINT [PK_Ingredient];
+
+GO
+
+EXEC sp_rename N'[Ingredient]', N'Ingredients';
+
+GO
+
+ALTER TABLE [Ingredients] ADD CONSTRAINT [PK_Ingredients] PRIMARY KEY ([IngredientId]);
+
+GO
+
+ALTER TABLE [IngredientQuantity] ADD CONSTRAINT [FK_IngredientQuantity_Ingredients_IngredientId] FOREIGN KEY ([IngredientId]) REFERENCES [Ingredients] ([IngredientId]) ON DELETE CASCADE;
+
+GO
+
+ALTER TABLE [RecipeIngredient] ADD CONSTRAINT [FK_RecipeIngredient_Ingredients_IngredientId] FOREIGN KEY ([IngredientId]) REFERENCES [Ingredients] ([IngredientId]) ON DELETE CASCADE;
+
+GO
+
+ALTER TABLE [Recipes] ADD CONSTRAINT [FK_Recipes_Authors_AuthorId] FOREIGN KEY ([AuthorId]) REFERENCES [Authors] ([AuthorId]) ON DELETE NO ACTION;
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200915082412_RenameIngredientTableToIngredients', N'3.1.8');
+
+GO
+
