@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 /Src/FoodRecipesApi.WebApi/Properties/launchSettings.json
 /Src/FoodRecipesApi.WebApi/appsettings.Development.json
+/Src/FoodRecipesApi.WebApi/Logger
