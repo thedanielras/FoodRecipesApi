@@ -376,3 +376,28 @@ VALUES (N'20200915082412_RenameIngredientTableToIngredients', N'3.1.8');
 
 GO
 
+ALTER TABLE [Authors] DROP CONSTRAINT [AK_Authors_Name_Surname];
+
+GO
+
+DROP INDEX [IX_Authors_Name_Surname] ON [Authors];
+
+GO
+
+ALTER TABLE [Authors] ADD [EmailAdress] nvarchar(60) NOT NULL DEFAULT N'';
+
+GO
+
+ALTER TABLE [Authors] ADD CONSTRAINT [AK_Authors_Name_Surname_EmailAdress] UNIQUE ([Name], [Surname], [EmailAdress]);
+
+GO
+
+CREATE INDEX [IX_Authors_Name_Surname_EmailAdress] ON [Authors] ([Name], [Surname], [EmailAdress]);
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200922073753_AddAuthorEmailAdressProp', N'3.1.8');
+
+GO
+
