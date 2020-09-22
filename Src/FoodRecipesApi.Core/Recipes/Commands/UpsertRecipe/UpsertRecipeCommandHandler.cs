@@ -33,7 +33,8 @@ namespace FoodRecipesApi.Application.Recipes.Commands.UpsertRecipe
             {
                 authorEntity = _context.Authors
                                        .Where(a => a.Name == request.Author.Name &&
-                                                   a.Surname == request.Author.Surname)
+                                                   a.Surname == request.Author.Surname &&
+                                                   a.EmailAdress == request.Author.Email)
                                        .FirstOrDefault();
             }
 
@@ -43,6 +44,7 @@ namespace FoodRecipesApi.Application.Recipes.Commands.UpsertRecipe
                 {
                     Name = request.Author.Name,
                     Surname = request.Author.Surname,
+                    EmailAdress = request.Author.Email,
                     ImageUrl = request.Author.ImageUrl
                 };
 
