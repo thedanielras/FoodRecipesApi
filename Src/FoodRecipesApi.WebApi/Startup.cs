@@ -30,14 +30,14 @@ namespace FoodRecipesApi.WebApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {          
+        {
             services.AddPersistence(Configuration);
             services.AddApplication();
             services.AddControllers()
                 .AddNewtonsoftJson()
                 .AddFluentValidation(conf => conf.RegisterValidatorsFromAssemblyContaining<IFoodRecipesDbContext>());
-            services.AddSwaggerDocument(confing => 
-            confing.PostProcess = document => 
+            services.AddSwaggerDocument(confing =>
+            confing.PostProcess = document =>
                 {
                     document.Info.Version = "v1";
                     document.Info.Title = "FoodRecipes API";
@@ -55,21 +55,19 @@ namespace FoodRecipesApi.WebApi
                         Url = "https://opensource.org/licenses/MIT"
                     };
                 }
-            );            
+            );
+
+            // Customise default API behaviour
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                //app.UseDeveloperExceptionPage();
-                app.UseExceptionHandler("/error");
-            }
-            else
-            {
-                app.UseExceptionHandler("/error");
-            }
+            app.UseExceptionHandler("/error");
 
             app.UseHttpsRedirection();
 
