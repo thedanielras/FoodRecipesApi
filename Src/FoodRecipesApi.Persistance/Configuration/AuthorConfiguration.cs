@@ -18,12 +18,14 @@ namespace FoodRecipesApi.Persistence.Configuration
 
             builder.HasIndex(a => new {
                 a.Name,
-                a.Surname
+                a.Surname,
+                a.EmailAdress
             });
 
             builder.HasAlternateKey(a => new {
                 a.Name,
-                a.Surname
+                a.Surname,
+                a.EmailAdress
             });
 
             builder.Property(a => a.Name)
@@ -32,6 +34,10 @@ namespace FoodRecipesApi.Persistence.Configuration
 
             builder.Property(a => a.Surname)
                 .HasMaxLength(50)
+                .IsRequired();  
+            
+            builder.Property(a => a.EmailAdress)
+                .HasMaxLength(60)
                 .IsRequired();         
 
             builder.Property(a => a.ImageUrl)
