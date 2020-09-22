@@ -20,7 +20,7 @@ namespace FoodRecipesApi.Application.Common.Behaviours
         public Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var name = typeof(TRequest).Name;
-            _logger.LogWarning("Food Recipes API Request: {Name} {@Request}",
+            _logger.LogInformation("Food Recipes API Request: {Name} {@Request}",
                name, request);
 
             return Task.CompletedTask;
