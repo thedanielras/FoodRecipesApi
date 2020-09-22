@@ -16,20 +16,32 @@ namespace FoodRecipesApi.Persistence.Configuration
                 .HasForeignKey(r => r.AuthorId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.HasIndex(a => new {
+                a.Name,
+                a.Surname,
+                a.EmailAdress
+            });
+
+            builder.HasAlternateKey(a => new {
+                a.Name,
+                a.Surname,
+                a.EmailAdress
+            });
+
             builder.Property(a => a.Name)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder.Property(a => a.Surname)
-                .HasMaxLength(20)
-                .IsRequired();
-
-            builder.Property(a => a.Born)
-                .HasColumnType("Date")
-                .IsRequired();
+                .HasMaxLength(50)
+                .IsRequired();  
+            
+            builder.Property(a => a.EmailAdress)
+                .HasMaxLength(60)
+                .IsRequired();         
 
             builder.Property(a => a.ImageUrl)
-                .HasMaxLength(100);
+                .HasMaxLength(250);
         }
     }
 }

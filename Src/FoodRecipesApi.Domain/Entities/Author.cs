@@ -14,9 +14,8 @@ namespace FoodRecipesApi.Domain.Entities
         public int AuthorId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string EmailAdress { get; set; }
         public string ImageUrl { get; set; }
-        public DateTime Born { get; set; }
-        public int Age => (int)(DateTime.Now - Born).TotalDays / 365;
         public ICollection<Recipe> Recipes { get; private set; }
     }
 }

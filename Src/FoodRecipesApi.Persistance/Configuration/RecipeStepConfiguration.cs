@@ -21,7 +21,7 @@ namespace FoodRecipesApi.Persistence.Configuration
                 .IsRequired();
 
             builder.Property(rs => rs.ImageUrl)
-                .HasMaxLength(100);
+                .HasMaxLength(250);
         }
     }
 }

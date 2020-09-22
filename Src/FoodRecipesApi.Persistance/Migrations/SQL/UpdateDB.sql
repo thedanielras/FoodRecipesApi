@@ -186,3 +186,218 @@ VALUES (N'20200911212345_AddMeasurementUnitTableAndChangedTheRecipeTimesTypes', 
 
 GO
 
+DECLARE @var5 sysname;
+SELECT @var5 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[RecipeStep]') AND [c].[name] = N'ImageUrl');
+IF @var5 IS NOT NULL EXEC(N'ALTER TABLE [RecipeStep] DROP CONSTRAINT [' + @var5 + '];');
+ALTER TABLE [RecipeStep] ALTER COLUMN [ImageUrl] nvarchar(250) NULL;
+
+GO
+
+DECLARE @var6 sysname;
+SELECT @var6 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Recipes]') AND [c].[name] = N'Title');
+IF @var6 IS NOT NULL EXEC(N'ALTER TABLE [Recipes] DROP CONSTRAINT [' + @var6 + '];');
+ALTER TABLE [Recipes] ALTER COLUMN [Title] nvarchar(150) NOT NULL;
+
+GO
+
+DECLARE @var7 sysname;
+SELECT @var7 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Recipes]') AND [c].[name] = N'ImageUrl');
+IF @var7 IS NOT NULL EXEC(N'ALTER TABLE [Recipes] DROP CONSTRAINT [' + @var7 + '];');
+ALTER TABLE [Recipes] ALTER COLUMN [ImageUrl] nvarchar(250) NOT NULL;
+
+GO
+
+DECLARE @var8 sysname;
+SELECT @var8 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Recipes]') AND [c].[name] = N'Description');
+IF @var8 IS NOT NULL EXEC(N'ALTER TABLE [Recipes] DROP CONSTRAINT [' + @var8 + '];');
+ALTER TABLE [Recipes] ALTER COLUMN [Description] nvarchar(1000) NOT NULL;
+
+GO
+
+DECLARE @var9 sysname;
+SELECT @var9 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[MeasurementUnit]') AND [c].[name] = N'Unit');
+IF @var9 IS NOT NULL EXEC(N'ALTER TABLE [MeasurementUnit] DROP CONSTRAINT [' + @var9 + '];');
+ALTER TABLE [MeasurementUnit] ALTER COLUMN [Unit] nvarchar(75) NOT NULL;
+
+GO
+
+DECLARE @var10 sysname;
+SELECT @var10 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Ingredient]') AND [c].[name] = N'Name');
+IF @var10 IS NOT NULL EXEC(N'ALTER TABLE [Ingredient] DROP CONSTRAINT [' + @var10 + '];');
+ALTER TABLE [Ingredient] ALTER COLUMN [Name] nvarchar(150) NOT NULL;
+
+GO
+
+DECLARE @var11 sysname;
+SELECT @var11 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Authors]') AND [c].[name] = N'Surname');
+IF @var11 IS NOT NULL EXEC(N'ALTER TABLE [Authors] DROP CONSTRAINT [' + @var11 + '];');
+ALTER TABLE [Authors] ALTER COLUMN [Surname] nvarchar(50) NOT NULL;
+
+GO
+
+DECLARE @var12 sysname;
+SELECT @var12 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Authors]') AND [c].[name] = N'Name');
+IF @var12 IS NOT NULL EXEC(N'ALTER TABLE [Authors] DROP CONSTRAINT [' + @var12 + '];');
+ALTER TABLE [Authors] ALTER COLUMN [Name] nvarchar(50) NOT NULL;
+
+GO
+
+DECLARE @var13 sysname;
+SELECT @var13 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Authors]') AND [c].[name] = N'ImageUrl');
+IF @var13 IS NOT NULL EXEC(N'ALTER TABLE [Authors] DROP CONSTRAINT [' + @var13 + '];');
+ALTER TABLE [Authors] ALTER COLUMN [ImageUrl] nvarchar(250) NULL;
+
+GO
+
+CREATE INDEX [IX_Authors_Name_Surname_Born] ON [Authors] ([Name], [Surname], [Born]);
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200913204317_AlterMaxLengthConstrainsForBiggerSizes', N'3.1.8');
+
+GO
+
+DROP INDEX [IX_Authors_Name_Surname_Born] ON [Authors];
+
+GO
+
+DECLARE @var14 sysname;
+SELECT @var14 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Authors]') AND [c].[name] = N'Born');
+IF @var14 IS NOT NULL EXEC(N'ALTER TABLE [Authors] DROP CONSTRAINT [' + @var14 + '];');
+ALTER TABLE [Authors] DROP COLUMN [Born];
+
+GO
+
+CREATE INDEX [IX_Authors_Name_Surname] ON [Authors] ([Name], [Surname]);
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200913204950_RemoveAuthorEntityBornProp', N'3.1.8');
+
+GO
+
+CREATE INDEX [IX_Recipes_Title_AuthorId] ON [Recipes] ([Title], [AuthorId]);
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200913205909_MadeIndexesOfAuthorAndTitleRecipeProps', N'3.1.8');
+
+GO
+
+ALTER TABLE [Authors] ADD CONSTRAINT [AK_Authors_Name_Surname] UNIQUE ([Name], [Surname]);
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200913211131_AddAlternateKeyByAuthorNameAndSurnameProps', N'3.1.8');
+
+GO
+
+ALTER TABLE [Recipes] ADD CONSTRAINT [AK_Recipes_Title_AuthorId] UNIQUE ([Title], [AuthorId]);
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200913211251_AddAlternateKeyByRecipeAuthorIdAndTitleProps', N'3.1.8');
+
+GO
+
+ALTER TABLE [IngredientQuantity] DROP CONSTRAINT [FK_IngredientQuantity_Ingredient_IngredientId];
+
+GO
+
+ALTER TABLE [RecipeIngredient] DROP CONSTRAINT [FK_RecipeIngredient_Ingredient_IngredientId];
+
+GO
+
+ALTER TABLE [Recipes] DROP CONSTRAINT [FK_Recipes_Authors_AuthorId];
+
+GO
+
+ALTER TABLE [Ingredient] DROP CONSTRAINT [PK_Ingredient];
+
+GO
+
+EXEC sp_rename N'[Ingredient]', N'Ingredients';
+
+GO
+
+ALTER TABLE [Ingredients] ADD CONSTRAINT [PK_Ingredients] PRIMARY KEY ([IngredientId]);
+
+GO
+
+ALTER TABLE [IngredientQuantity] ADD CONSTRAINT [FK_IngredientQuantity_Ingredients_IngredientId] FOREIGN KEY ([IngredientId]) REFERENCES [Ingredients] ([IngredientId]) ON DELETE CASCADE;
+
+GO
+
+ALTER TABLE [RecipeIngredient] ADD CONSTRAINT [FK_RecipeIngredient_Ingredients_IngredientId] FOREIGN KEY ([IngredientId]) REFERENCES [Ingredients] ([IngredientId]) ON DELETE CASCADE;
+
+GO
+
+ALTER TABLE [Recipes] ADD CONSTRAINT [FK_Recipes_Authors_AuthorId] FOREIGN KEY ([AuthorId]) REFERENCES [Authors] ([AuthorId]) ON DELETE NO ACTION;
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200915082412_RenameIngredientTableToIngredients', N'3.1.8');
+
+GO
+
+ALTER TABLE [Authors] DROP CONSTRAINT [AK_Authors_Name_Surname];
+
+GO
+
+DROP INDEX [IX_Authors_Name_Surname] ON [Authors];
+
+GO
+
+ALTER TABLE [Authors] ADD [EmailAdress] nvarchar(60) NOT NULL DEFAULT N'';
+
+GO
+
+ALTER TABLE [Authors] ADD CONSTRAINT [AK_Authors_Name_Surname_EmailAdress] UNIQUE ([Name], [Surname], [EmailAdress]);
+
+GO
+
+CREATE INDEX [IX_Authors_Name_Surname_EmailAdress] ON [Authors] ([Name], [Surname], [EmailAdress]);
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200922073753_AddAuthorEmailAdressProp', N'3.1.8');
+
+GO
+

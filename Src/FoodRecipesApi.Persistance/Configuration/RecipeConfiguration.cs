@@ -14,6 +14,7 @@ namespace FoodRecipesApi.Persistence.Configuration
             builder.HasOne(r => r.Author)
                 .WithMany(a => a.Recipes)
                 .HasForeignKey(r => r.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
             builder.HasMany(r => r.RecipeSteps)
@@ -22,12 +23,16 @@ namespace FoodRecipesApi.Persistence.Configuration
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
+            builder.HasIndex(r => new { r.Title, r.AuthorId });
+
+            builder.HasAlternateKey(r => new { r.Title, r.AuthorId });
+
             builder.Property(r => r.Title)
-                .HasMaxLength(30)
+                .HasMaxLength(150)
                 .IsRequired();
 
             builder.Property(r => r.Description)
-                .HasMaxLength(500)
+                .HasMaxLength(1000)
                 .IsRequired();
 
             builder.Property(r => r.PreparationTimeInMinutes)
@@ -37,7 +42,7 @@ namespace FoodRecipesApi.Persistence.Configuration
                 .IsRequired();
 
             builder.Property(r => r.ImageUrl)
-                .HasMaxLength(100)
+                .HasMaxLength(250)
                 .IsRequired();
         }
     }

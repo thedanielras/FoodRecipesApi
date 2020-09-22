@@ -14,11 +14,14 @@ namespace FoodRecipesApi.Persistence.Configuration
             builder.HasOne(iq => iq.Ingredient)
                 .WithOne(i => i.Quantity)
                 .HasForeignKey<IngredientQuantity>(i => i.IngredientId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
             builder.HasOne(iq => iq.MeasurementUnit)
                 .WithOne(mu => mu.IngredientQuantity)
-                .HasForeignKey<IngredientQuantity>(iq => iq.MeasurementUnitId);
+                .HasForeignKey<IngredientQuantity>(iq => iq.MeasurementUnitId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
         }
     }
 }
