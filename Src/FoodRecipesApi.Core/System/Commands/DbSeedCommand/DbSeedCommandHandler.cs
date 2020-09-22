@@ -37,7 +37,7 @@ namespace FoodRecipesApi.Application.System.Commands.DbSeedCommand
             {
                 Title = "King Ranch Chicken Mac and Cheese",
                 Description = "All the flavors of a favorite casserole come together in the comfort of mac and cheese. Serve King Ranch Chicken Mac and Cheese to your family, and it will become a quick favorite.",
-                Author = new Author() { Name = "Southern", Surname = "Living" },
+                Author = new Author() { Name = "Southern", Surname = "Living", EmailAdress = "southern-living@gmail.com" },
                 RecipeSteps = new List<RecipeStep>() {
                     new RecipeStep() {
                         Instruction = "Preheat oven to 350°. Prepare pasta according to package directions."
@@ -193,7 +193,7 @@ namespace FoodRecipesApi.Application.System.Commands.DbSeedCommand
             {
                 Title = "Easy Chicken and Dumplings",
                 Description = "Deli-roasted chicken, cream of chicken soup, and canned biscuits make a quick-and-tasty version of classic chicken and dumplings.",
-                Author = new Author() { Name = "Southern", Surname = "Living" },
+                Author = new Author() { Name = "Southern", Surname = "Living", EmailAdress = "southern-living@gmail.com" },
                 RecipeSteps = new List<RecipeStep>() {
                     new RecipeStep() {
                         Instruction = "Bring first 4 ingredients to a boil in a Dutch oven over medium-high heat. Cover, reduce heat to low, and simmer, stirring occasionally, 5 minutes. Increase heat to medium-high; return to a low boil."
@@ -345,8 +345,10 @@ namespace FoodRecipesApi.Application.System.Commands.DbSeedCommand
                 }
             });
 
-            sampleRecipes.ForEach(recipe =>
+            for(int i = 0; i < sampleRecipes.Count; i++)
             {
+                Recipe recipe = sampleRecipes[i];
+
                 //check if author already exists
                 var author = _context.Authors.Where(a => a.Name == recipe.Author.Name &&
                                        a.Surname == recipe.Author.Surname)
@@ -354,6 +356,11 @@ namespace FoodRecipesApi.Application.System.Commands.DbSeedCommand
 
                 if (author != null)
                 {
+                    //check if recipes already exists
+                    if (_context.Recipes.Where(r => r.AuthorId == author.AuthorId && r.Title == recipe.Title).FirstOrDefault() != null)
+                        continue;
+                    
+                    //if no then add
                     author.Recipes.Add(recipe);
                 }
                 else
@@ -369,7 +376,7 @@ namespace FoodRecipesApi.Application.System.Commands.DbSeedCommand
                 {
                     _logger.LogError(ex, "Database seeding failed!");
                 }
-            });
+            }           
         }
     }
 }
