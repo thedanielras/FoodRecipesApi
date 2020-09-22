@@ -1,4 +1,5 @@
 ﻿using FoodRecipesApi.Application.Common.Dtos;
+using FoodRecipesApi.Application.Common.Exceptions;
 using FoodRecipesApi.Application.Common.Interfaces;
 using FoodRecipesApi.Application.Recipes.Commands.DeleteRecipe;
 using FoodRecipesApi.Application.Recipes.Commands.UpsertRecipe;
@@ -33,7 +34,7 @@ namespace FoodRecipesApi.WebApi.Controllers
         {
             var recipes = await _mediator.Send(new GetAllRecipesQuery());
 
-            return Ok(recipes);
+            return Ok(new BaseJson(recipes));
         }
 
         [HttpGet("{id:int}")]
@@ -43,17 +44,17 @@ namespace FoodRecipesApi.WebApi.Controllers
 
 
             if (recipe == null)
-                return NotFound();
+                throw new NotFoundException("recipe", id);
             else
-                return Ok(recipe);
+                return Ok(new BaseJson(recipe));
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> UpsertRecipe(UpsertRecipeCommand upsertRecipeCommand)
+        public async Task<ActionResult<int>> UpsertRecipe([FromBody] UpsertRecipeCommand upsertRecipeCommand)
         {
             int recipeId = await _mediator.Send(upsertRecipeCommand);
 
-            return Ok(recipeId);
+            return Ok(new BaseJson(recipeId));
         }
 
         [HttpDelete("{id:int}")]
@@ -65,7 +66,7 @@ namespace FoodRecipesApi.WebApi.Controllers
         }
 
         [Route("/error")]
-        public override ActionResult<ApiErrorModel> SendError()
+        public override ActionResult SendError()
         {
             return base.SendError();
         }
